@@ -474,6 +474,18 @@ body {
     .container {
         padding: 0 15px;
     }
+    
+    .navigation {
+        padding: 1rem;
+    }
+    
+    .scroll-arrow {
+        bottom: 1rem;
+    }
+    
+    .video-overlay {
+        padding: 2rem 1rem 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -489,6 +501,16 @@ body {
     
     .about {
         padding: 3rem 0;
+    }
+    
+    .top-video-section {
+        height: 70vh;
+    }
+    
+    .nav-btn,
+    .scroll-arrow {
+        width: 40px;
+        height: 40px;
     }
 }
 

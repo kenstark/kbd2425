@@ -46,8 +46,33 @@
 
     <!-- Main Content -->
     <main id="main-content" class="main-content">
+        <!-- Top Video Section -->
+        <section class="top-video-section">
+            <div class="top-video-container">
+                <video 
+                    autoplay 
+                    muted 
+                    loop 
+                    poster="./assets/video/top-poster.jpg"
+                    preload="metadata"
+                    aria-label="Top featured video"
+                >
+                    <source src="./assets/video/top-video.mp4" type="video/mp4">
+                    <p>Your browser doesn't support video playback. Please update your browser or try a different device.</p>
+                </video>
+                <div class="video-overlay">
+                    <h2 class="video-title">A Year of Amazing Moments</h2>
+                </div>
+            </div>
+            <button class="scroll-arrow" id="top-video-arrow" type="button" aria-label="Scroll to next section">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6"/>
+                </svg>
+            </button>
+        </section>
+
         <!-- Hero Section -->
-        <header class="hero">
+        <header class="hero" id="hero-section">
             <div class="container">
                 <h1 class="hero-title">The Best Things About 24</h1>
                 <p class="hero-subtitle">This year is going to be incredible, and here's why</p>
@@ -65,6 +90,11 @@
                     <li>🎉 Celebrating all your accomplishments</li>
                 </ul>
             </div>
+            <button class="scroll-arrow" id="hero-arrow" type="button" aria-label="Scroll to next section">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6"/>
+                </svg>
+            </button>
         </header>
 
         <!-- About Section -->
@@ -74,7 +104,7 @@
                     Kimberly, watching you grow into the amazing person you are today has been such a joy. 
                     Your kindness, creativity, and determination inspire everyone around you. 
                     Here's to another year of incredible adventures and beautiful moments! 
-                    <em>— With love from your brother</em>
+                    <em>— With love from Kyle</em>
                 </p>
             </div>
         </section>

@@ -145,6 +145,13 @@ function handleScroll() {
     } else {
         backToTop.classList.remove('visible');
     }
+    
+    // Show/hide navigation based on scroll position
+    if (hasEnteredSite && scrollTop > 100) {
+        navigation.classList.add('visible');
+    } else if (!hasEnteredSite) {
+        navigation.classList.remove('visible');
+    }
 }
 
 // Scroll to top
