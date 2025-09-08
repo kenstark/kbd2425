@@ -1,6 +1,6 @@
 /* CSS Variables */
 :root {
-    --primary-color: #ff6b9d;
+    --primary-color: #03045e;
     --secondary-color: #a8e6cf;
     --accent-color: #ffd93d;
     --text-color: #2c3e50;
@@ -392,7 +392,8 @@ body {
 
 /* Video Container */
 .video-container {
-    max-width: 800px;
+    max-width: 900px;
+    width: 90%;
     margin: 0 auto 4rem;
     border-radius: var(--border-radius);
     overflow: hidden;
