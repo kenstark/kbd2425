@@ -37,24 +37,23 @@ function generateGallery() {
         { name: 'photo05', ext: 'jpg', orientation: 'vertical' },
         { name: 'photo06', ext: 'jpg', orientation: 'horizontal' },
         { name: 'photo07', ext: 'JPEG', orientation: 'horizontal' },
-        // Placeholders for photos 08-24 (will show placeholder until real photos are added)
         { name: 'photo08', ext: 'JPEG', orientation: 'horizontal'},
         { name: 'photo09', ext: 'JPEG', orientation: 'vertical'},
         { name: 'photo10', ext: 'JPEG', orientation: 'horizontal'},
         { name: 'photo11', ext: 'JPEG', orientation: 'vertical'},
-        { name: 'photo12', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo13', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo14', ext: 'jpg', orientation: 'vertical', placeholder: true },
-        { name: 'photo15', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo16', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo17', ext: 'jpg', orientation: 'vertical', placeholder: true },
-        { name: 'photo18', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo19', ext: 'jpg', orientation: 'vertical', placeholder: true },
-        { name: 'photo20', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo21', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo22', ext: 'jpg', orientation: 'vertical', placeholder: true },
-        { name: 'photo23', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo24', ext: 'jpg', orientation: 'vertical', placeholder: true }
+        { name: 'photo12', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo13', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo14', ext: 'JPEG', orientation: 'vertical' },
+        { name: 'photo15', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo16', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo17', ext: 'JPEG', orientation: 'vertical' },
+        { name: 'photo18', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo19', ext: 'JPEG', orientation: 'vertical' },
+        { name: 'photo20', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo21', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo22', ext: 'JPEG', orientation: 'vertical' },
+        { name: 'photo23', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo24', ext: 'JPEG', orientation: 'vertical' }
     ];
     
     photoFiles.forEach((photo, i) => {
