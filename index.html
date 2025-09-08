@@ -49,16 +49,19 @@
         <!-- Top Video Section -->
         <section class="top-video-section" onclick="scrollToNextSection('#hero-section')">
             <div class="top-video-container">
-                <div class="video-placeholder">
-                    <div class="video-placeholder-content">
-                        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                            <polygon points="5,3 19,12 5,21"/>
-                        </svg>
-                        <h2>Featured Video</h2>
-                        <p>Your main birthday video will go here</p>
-                        <small>Replace with: assets/video/kimbdayvid.mp4</small>
-                    </div>
-                </div>
+                <video 
+                    id="main-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    poster="./assets/video/poster.jpg"
+                    preload="metadata"
+                    aria-label="Kimberly's birthday video"
+                >
+                    <source src="./assets/video/kimbdayvid.mp4" type="video/mp4">
+                    <p>Your browser doesn't support video playback.</p>
+                </video>
                 <div class="video-overlay">
                     <h2 class="video-title">A Year of Amazing Moments</h2>
                 </div>
@@ -121,7 +124,7 @@
                         preload="metadata"
                         aria-label="Featured birthday video for Kimberly"
                     >
-                        <source src="./assets/video/kimbdayvid.MOV" type="video/MOV">
+                        <source src="./assets/video/kimbdayvid.mp4" type="video/mp4">
                         <p>Your browser doesn't support video playback. Please update your browser or try a different device.</p>
                     </video>
                 </div>
