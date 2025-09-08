@@ -181,7 +181,7 @@ function enterSite() {
             landing.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }, 500);
-    }, 5000);
+    }, 4000);
 }
 
 // Create continuous confetti animation that never stops
@@ -253,7 +253,7 @@ function createConfetti() {
             piece.y += piece.vy;
             piece.x += piece.vx + Math.sin(animationTime + piece.swayOffset) * 0.8;
             piece.rotation += piece.rotationSpeed;
-            piece.vy += 0.03; // Gentle gravity
+            piece.vy += 0.09; // lesser Gentle gravity
             
             // Gentle fade out near the bottom
             if (piece.y > window.innerHeight * 0.85) {
