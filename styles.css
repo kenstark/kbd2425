@@ -380,6 +380,97 @@ body {
 /* Memories Section */
 .memories {
     padding: 4rem 0 6rem;
+    position: relative;
+}
+
+.memories .scroll-arrow {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow-light);
+}
+
+.memories .scroll-arrow:hover {
+    background: white;
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.memories .scroll-arrow svg {
+    color: var(--primary-color);
+    width: 32px;
+    height: 32px;
+}
+
+/* Quotes Section */
+.quotes {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.03) 0%, rgba(168, 230, 207, 0.03) 100%);
+}
+
+.quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.quote-card {
+    background: var(--card-background);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border-left: 4px solid var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.quote-card::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--primary-color);
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    font-family: Georgia, serif;
+    opacity: 0.2;
+    line-height: 1;
+}
+
+.friend-quote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-style: italic;
+    margin: 0 0 1.5rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.friend-name {
+    display: block;
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-style: normal;
+    font-weight: 600;
+    text-align: right;
 }
 
 .section-title {
@@ -619,6 +710,15 @@ body {
     .party-plan-dropdown {
         width: 250px;
         right: -20px;
+    }
+    
+    .quotes-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .quote-card {
+        padding: 1.5rem;
     }
     
     .lightbox-prev,

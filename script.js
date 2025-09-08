@@ -171,7 +171,7 @@ function enterSite() {
     // Create confetti
     createConfetti();
     
-    // Show main content first, then hide landing
+    // Wait 2 seconds to enjoy the confetti, then transition
     setTimeout(() => {
         // Show main content
         mainContent.classList.remove('hidden');
@@ -181,7 +181,7 @@ function enterSite() {
             landing.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }, 500);
-    }, 1500);
+    }, 5000);
 }
 
 // Create confetti animation
