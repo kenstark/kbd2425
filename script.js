@@ -118,13 +118,6 @@ function enterSite() {
         setTimeout(() => {
             landing.classList.add('hidden');
             document.body.style.overflow = 'auto';
-            
-            // Start the video if it exists
-            const mainVideo = document.getElementById('main-video');
-            if (mainVideo) {
-                mainVideo.currentTime = 0;
-                mainVideo.play().catch(e => console.log('Video autoplay prevented:', e));
-            }
         }, 500);
     }, 1500);
 }
@@ -189,6 +182,14 @@ function scrollToTop() {
         top: 0,
         behavior: 'smooth'
     });
+}
+
+// Scroll to next section
+function scrollToNextSection(selector) {
+    const section = document.querySelector(selector);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Open lightbox
@@ -293,27 +294,6 @@ sparkleStyle.textContent = `
         }
     }
     
-    @keyframes confettiFall {
-        0% {
-            transform: translateY(-100vh) rotate(0deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-        }
-    }
-    
-    .confetti-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1000;
-        overflow: hidden;
-    }
 `;
 document.head.appendChild(sparkleStyle);
 
