@@ -68,7 +68,7 @@ function generateGallery() {
         
         // Create gallery item
         const galleryItem = document.createElement('div');
-        galleryItem.className = `gallery-item ${photo.orientation === 'vertical' ? 'vertical' : ''}`;
+        galleryItem.className = 'gallery-item';
         galleryItem.setAttribute('data-index', i);
         
         const img = document.createElement('img');

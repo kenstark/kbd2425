@@ -55,32 +55,23 @@
             </div>
         </nav>
 
-        <!-- Hero Section -->
-        <header class="hero" id="hero-section">
+        <!-- Main Video Section -->
+        <section class="main-video-section">
             <div class="container">
-                <h1 class="hero-title">The Best Things About 24</h1>
-                <p class="hero-subtitle">This year is going to be incredible, and here's why</p>
-                
-                <ul class="highlights-list">
-                    <li>🌟 New adventures waiting to unfold</li>
-                    <li>💝 Deepening friendships and connections</li>
-                    <li>🎯 Chasing big dreams with confidence</li>
-                    <li>📚 Learning and growing every single day</li>
-                    <li>🌸 Embracing your authentic self</li>
-                    <li>✨ Creating beautiful memories</li>
-                    <li>🎨 Exploring new passions and hobbies</li>
-                    <li>💪 Building strength and resilience</li>
-                    <li>🌈 Finding joy in the little moments</li>
-                    <li>🎉 Celebrating all your accomplishments</li>
-                </ul>
-                
-                <button class="scroll-arrow hero-scroll" type="button" aria-label="Scroll to next section" onclick="scrollToNextSection('.memories')">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
-                </button>
+                <div class="video-container">
+                    <video 
+                        controls 
+                        poster="./assets/video/poster.jpg"
+                        preload="metadata"
+                        aria-label="Kimberly's birthday video"
+                    >
+                        <source src="./assets/video/kimbdayvid.mp4" type="video/mp4">
+                        <p>Your browser doesn't support video playback.</p>
+                    </video>
+                </div>
             </div>
-        </header>
+        </section>
+
 
         <!-- About Section -->
         <section class="about">
