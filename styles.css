@@ -481,10 +481,25 @@ body {
     
     .scroll-arrow {
         bottom: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .scroll-arrow svg {
+        width: 28px;
+        height: 28px;
     }
     
     .video-overlay {
         padding: 2rem 1rem 1rem;
+    }
+    
+    .video-placeholder-content {
+        padding: 1.5rem;
+    }
+    
+    .video-placeholder-content h2 {
+        font-size: 1.5rem;
     }
 }
 
@@ -511,6 +526,16 @@ body {
     .scroll-arrow {
         width: 40px;
         height: 40px;
+    }
+    
+    .scroll-arrow svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .video-placeholder-content svg {
+        width: 80px;
+        height: 80px;
     }
 }
 

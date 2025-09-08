@@ -45,34 +45,33 @@
     </section>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content">
+    <main id="main-content" class="main-content hidden">
         <!-- Top Video Section -->
-        <section class="top-video-section">
+        <section class="top-video-section" onclick="scrollToNextSection('#hero-section')">
             <div class="top-video-container">
-                <video 
-                    autoplay 
-                    muted 
-                    loop 
-                    poster="./assets/video/top-poster.jpg"
-                    preload="metadata"
-                    aria-label="Top featured video"
-                >
-                    <source src="./assets/video/top-video.mp4" type="video/mp4">
-                    <p>Your browser doesn't support video playback. Please update your browser or try a different device.</p>
-                </video>
+                <div class="video-placeholder">
+                    <div class="video-placeholder-content">
+                        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                        <h2>Featured Video</h2>
+                        <p>Your main birthday video will go here</p>
+                        <small>Replace with: assets/video/main-video.mp4</small>
+                    </div>
+                </div>
                 <div class="video-overlay">
                     <h2 class="video-title">A Year of Amazing Moments</h2>
                 </div>
             </div>
-            <button class="scroll-arrow" id="top-video-arrow" type="button" aria-label="Scroll to next section">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="scroll-arrow video-scroll" type="button" aria-label="Scroll to next section" onclick="scrollToNextSection('#hero-section')">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m6 9 6 6 6-6"/>
                 </svg>
             </button>
         </section>
 
         <!-- Hero Section -->
-        <header class="hero" id="hero-section">
+        <header class="hero" id="hero-section" onclick="scrollToNextSection('.memories')">
             <div class="container">
                 <h1 class="hero-title">The Best Things About 24</h1>
                 <p class="hero-subtitle">This year is going to be incredible, and here's why</p>
@@ -90,8 +89,8 @@
                     <li>🎉 Celebrating all your accomplishments</li>
                 </ul>
             </div>
-            <button class="scroll-arrow" id="hero-arrow" type="button" aria-label="Scroll to next section">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="scroll-arrow hero-scroll" type="button" aria-label="Scroll to next section" onclick="scrollToNextSection('.memories')">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m6 9 6 6 6-6"/>
                 </svg>
             </button>
