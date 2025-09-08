@@ -184,39 +184,98 @@ function enterSite() {
     }, 5000);
 }
 
-// Create confetti animation
+// Create continuous confetti animation that never stops
 function createConfetti() {
-    const confettiCount = 80;
+    const maxConfettiCount = 150; // More confetti on screen at once
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6c5ce7', '#a29bfe'];
     
     // Clear any existing confetti
     confettiContainer.innerHTML = '';
     
-    for (let i = 0; i < confettiCount; i++) {
+    const confettiPieces = [];
+    let animationTime = 0;
+    let lastSpawnTime = 0;
+    
+    // Function to create a new confetti piece
+    function createNewPiece() {
         const confetti = document.createElement('div');
-        confetti.className = 'confetti-piece';
+        
+        const piece = {
+            element: confetti,
+            x: Math.random() * window.innerWidth,
+            y: -30,
+            vx: (Math.random() - 0.5) * 2,
+            vy: Math.random() * 1.5 + 0.8,
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 4,
+            size: Math.random() * 6 + 3,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            opacity: 1,
+            swayOffset: Math.random() * Math.PI * 2,
+        };
+        
         confetti.style.cssText = `
             position: absolute;
-            left: ${Math.random() * 100}%;
-            top: -10px;
-            width: ${Math.random() * 8 + 4}px;
-            height: ${Math.random() * 8 + 4}px;
-            background: ${colors[Math.floor(Math.random() * colors.length)]};
-            animation: confettiFall ${Math.random() * 2 + 3}s linear forwards;
-            animation-delay: ${Math.random() * 2}s;
-            transform-origin: center;
+            width: ${piece.size}px;
+            height: ${piece.size}px;
+            background: ${piece.color};
+            pointer-events: none;
             z-index: 1000;
+            border-radius: 2px;
+            opacity: ${piece.opacity};
         `;
         
         confettiContainer.appendChild(confetti);
-        
-        // Remove confetti after animation
-        setTimeout(() => {
-            if (confetti.parentNode) {
-                confetti.parentNode.removeChild(confetti);
-            }
-        }, 7000);
+        confettiPieces.push(piece);
     }
+    
+    // Create initial burst of confetti
+    for (let i = 0; i < 80; i++) {
+        createNewPiece();
+    }
+    
+    // Continuous animation loop
+    function animateConfetti() {
+        animationTime += 0.03;
+        
+        // Add new confetti pieces periodically to maintain constant flow
+        if (animationTime - lastSpawnTime > 0.1 && confettiPieces.length < maxConfettiCount) {
+            // Create 2-4 new pieces at random intervals
+            const newPieces = Math.floor(Math.random() * 3) + 2;
+            for (let i = 0; i < newPieces; i++) {
+                createNewPiece();
+            }
+            lastSpawnTime = animationTime;
+        }
+        
+        confettiPieces.forEach((piece, index) => {
+            // Animate falling with swaying motion
+            piece.y += piece.vy;
+            piece.x += piece.vx + Math.sin(animationTime + piece.swayOffset) * 0.8;
+            piece.rotation += piece.rotationSpeed;
+            piece.vy += 0.03; // Gentle gravity
+            
+            // Gentle fade out near the bottom
+            if (piece.y > window.innerHeight * 0.85) {
+                piece.opacity = Math.max(0, 1 - (piece.y - window.innerHeight * 0.85) / (window.innerHeight * 0.15));
+                piece.element.style.opacity = piece.opacity;
+            }
+            
+            piece.element.style.transform = `translate(${piece.x}px, ${piece.y}px) rotate(${piece.rotation}deg)`;
+            
+            // Remove pieces that have fallen off screen and create new ones
+            if (piece.y > window.innerHeight + 50) {
+                confettiPieces.splice(index, 1);
+                piece.element.remove();
+            }
+        });
+        
+        // Continue animation indefinitely
+        requestAnimationFrame(animateConfetti);
+    }
+    
+    // Start animation immediately
+    animateConfetti();
 }
 
 // Handle scroll events
