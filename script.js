@@ -38,10 +38,10 @@ function generateGallery() {
         { name: 'photo06', ext: 'jpg', orientation: 'horizontal' },
         { name: 'photo07', ext: 'JPEG', orientation: 'horizontal' },
         // Placeholders for photos 08-24 (will show placeholder until real photos are added)
-        { name: 'photo08', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo09', ext: 'jpg', orientation: 'vertical', placeholder: true },
-        { name: 'photo10', ext: 'jpg', orientation: 'horizontal', placeholder: true },
-        { name: 'photo11', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo08', ext: 'JPEG', orientation: 'horizontal', placeholder: true },
+        { name: 'photo09', ext: 'JPEG', orientation: 'vertical', placeholder: true },
+        { name: 'photo10', ext: 'JPEG', orientation: 'horizontal', placeholder: true },
+        { name: 'photo11', ext: 'JPEG', orientation: 'vertical', placeholder: true },
         { name: 'photo12', ext: 'jpg', orientation: 'horizontal', placeholder: true },
         { name: 'photo13', ext: 'jpg', orientation: 'horizontal', placeholder: true },
         { name: 'photo14', ext: 'jpg', orientation: 'vertical', placeholder: true },
@@ -181,7 +181,7 @@ function enterSite() {
             landing.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }, 500);
-    }, 4000);
+    }, 3000);
 }
 
 // Create continuous confetti animation that never stops
@@ -253,7 +253,7 @@ function createConfetti() {
             piece.y += piece.vy;
             piece.x += piece.vx + Math.sin(animationTime + piece.swayOffset) * 0.8;
             piece.rotation += piece.rotationSpeed;
-            piece.vy += 0.09; // lesser Gentle gravity
+            piece.vy += 0.20; // lesser Gentle gravity
             
             // Gentle fade out near the bottom
             if (piece.y > window.innerHeight * 0.85) {
