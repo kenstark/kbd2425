@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kimberly Dao • 24</title>
-    <meta name="description" content="Celebrating Kimberly Dao's 24th birthday with memories, photos, and all the best things about being 24!">
+    <title>Kim Dao • 24</title>
+    <meta name="description" content="Celebrating Kim Dao's 24th birthday with memories, photos, and all the best things about being 24!">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Kimberly Dao • 24">
-    <meta property="og:description" content="Celebrating Kimberly Dao's 24th birthday with memories, photos, and all the best things about being 24!">
+    <meta property="og:title" content="Kim Dao • 24">
+    <meta property="og:description" content="Celebrating Kim Dao's 24th birthday with memories, photos, and all the best things about being 24!">
     <meta property="og:image" content="./assets/meta/og-cover.jpg">
     <meta property="og:url" content="">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kimberly Dao • 24">
-    <meta name="twitter:description" content="Celebrating Kimberly Dao's 24th birthday with memories, photos, and all the best things about being 24!">
+    <meta name="twitter:title" content="Kim Dao • 24">
+    <meta name="twitter:description" content="Celebrating Kim Dao's 24th birthday with memories, photos, and all the best things about being 24!">
     <meta name="twitter:image" content="./assets/meta/og-cover.jpg">
     
     <!-- Favicon -->
@@ -34,7 +34,7 @@
     <!-- Landing Screen -->
     <section id="landing" class="landing">
         <div class="landing-content">
-            <h1 class="landing-title">Happy 24th, Kimberly!</h1>
+            <h1 class="landing-title">Happy 24th, Kim!</h1>
             <p class="landing-subtitle">A celebration of you and all the amazing things about 24</p>
             <button id="enter-btn" class="enter-btn" type="button">
                 <span>Enter</span>
@@ -51,7 +51,16 @@
             <div class="nav-container">
                 <button id="home-btn" class="nav-btn">Home</button>
                 <h1 class="page-title">A Year of Amazing Moments</h1>
-                <button id="party-plan-btn" class="nav-btn">Party Plan</button>
+                <div class="party-plan-container">
+                    <button id="party-plan-btn" class="nav-btn">Party Plan</button>
+                    <div id="party-plan-dropdown" class="party-plan-dropdown">
+                        <div class="dropdown-content">
+                            <div class="lock-icon">🔒</div>
+                            <h3>Locked until September 16th!</h3>
+                            <p>The party plan will be revealed soon...</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
 
@@ -61,27 +70,39 @@
                 <div class="video-container">
                     <video 
                         controls 
-                        poster="./assets/video/poster.jpg"
+                        poster="./assets/icons/cute-birthday-cake-3d-rendering-pink-on-a-pink-background-free-photo.jpeg"
                         preload="metadata"
-                        aria-label="Kimberly's birthday video"
+                        aria-label="Kim's birthday video"
                     >
                         <source src="./assets/video/kimbdayvid.mp4" type="video/mp4">
                         <p>Your browser doesn't support video playback.</p>
                     </video>
                 </div>
+                <button class="scroll-arrow video-scroll" type="button" aria-label="Scroll to next section" onclick="scrollToNextSection('.kyle-quote')">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
             </div>
         </section>
 
 
-        <!-- About Section -->
-        <section class="about">
+        <!-- Kyle Quote Section -->
+        <section class="kyle-quote">
             <div class="container">
-                <p class="about-text">
-                    Kimberly, watching you grow into the amazing person you are today has been such a joy. 
-                    Your kindness, creativity, and determination inspire everyone around you. 
-                    Here's to another year of incredible adventures and beautiful moments! 
-                    <em>— With love from Kyle</em>
-                </p>
+                <div class="quote-container">
+                    <blockquote class="quote-text">
+                        Kim, watching you grow into the amazing person you are today has been such a joy. 
+                        Your kindness, creativity, and determination inspire everyone around you. 
+                        Here's to another year of incredible adventures and beautiful moments!
+                    </blockquote>
+                    <cite class="quote-author">— With love from Kyle</cite>
+                </div>
+                <button class="scroll-arrow quote-scroll" type="button" aria-label="Scroll to photo gallery" onclick="scrollToNextSection('.memories')">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
             </div>
         </section>
 
@@ -100,7 +121,7 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="container">
-                <p>Made with ❤️ for Kimberly's 24th</p>
+                <p>Made with ❤️ for Kim's 24th</p>
             </div>
         </footer>
     </main>

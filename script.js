@@ -117,9 +117,25 @@ function setupEventListeners() {
     }
     
     if (partyPlanBtn) {
-        partyPlanBtn.addEventListener('click', () => {
-            // Placeholder for party plan functionality
-            console.log('Party Plan clicked - functionality coming soon!');
+        const dropdown = document.getElementById('party-plan-dropdown');
+        
+        partyPlanBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (!partyPlanBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+        
+        // Close dropdown on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                dropdown.classList.remove('show');
+            }
         });
     }
     
