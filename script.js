@@ -30,26 +30,50 @@ document.addEventListener('DOMContentLoaded', function() {
 // Generate photo gallery
 function generateGallery() {
     const photoFiles = [
-        { name: 'photo01', ext: 'jpg' },
-        { name: 'photo02', ext: 'jpg' },
-        { name: 'photo03', ext: 'JPEG' },
-        { name: 'photo04', ext: 'JPEG' },
-        { name: 'photo05', ext: 'jpg' },
-        { name: 'photo06', ext: 'jpg' },
-        { name: 'photo07', ext: 'JPEG' }
+        { name: 'photo01', ext: 'jpg', orientation: 'horizontal' },
+        { name: 'photo02', ext: 'jpg', orientation: 'horizontal' },
+        { name: 'photo03', ext: 'JPEG', orientation: 'vertical' },
+        { name: 'photo04', ext: 'JPEG', orientation: 'horizontal' },
+        { name: 'photo05', ext: 'jpg', orientation: 'vertical' },
+        { name: 'photo06', ext: 'jpg', orientation: 'horizontal' },
+        { name: 'photo07', ext: 'JPEG', orientation: 'horizontal' },
+        // Placeholders for photos 08-24 (will show placeholder until real photos are added)
+        { name: 'photo08', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo09', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo10', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo11', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo12', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo13', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo14', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo15', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo16', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo17', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo18', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo19', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo20', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo21', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo22', ext: 'jpg', orientation: 'vertical', placeholder: true },
+        { name: 'photo23', ext: 'jpg', orientation: 'horizontal', placeholder: true },
+        { name: 'photo24', ext: 'jpg', orientation: 'vertical', placeholder: true }
     ];
     
     photoFiles.forEach((photo, i) => {
-        const imagePath = `./assets/photos/${photo.name}.${photo.ext}`;
+        let imagePath;
+        if (photo.placeholder) {
+            // Use placeholder image for photos that don't exist yet
+            imagePath = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjhmOWZhIi8+CjxwYXRoIGQ9Im0xNjAgMTEwIDgwIDgwIDgwLTgwIiBzdHJva2U9IiNkZGRkZGQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8Y2lyY2xlIGN4PSIxODAiIGN5PSIxMDAiIHI9IjIwIiBzdHJva2U9IiNkZGRkZGQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE2MCIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5OTk5Ij5QaG90byBDb21pbmcgU29vbjwvdGV4dD4KPC9zdmc+';
+        } else {
+            imagePath = `./assets/photos/${photo.name}.${photo.ext}`;
+        }
         
         // Create gallery item
         const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
+        galleryItem.className = `gallery-item ${photo.orientation === 'vertical' ? 'vertical' : ''}`;
         galleryItem.setAttribute('data-index', i);
         
         const img = document.createElement('img');
         img.src = imagePath;
-        img.alt = `Kimberly photo ${i + 1}`;
+        img.alt = photo.placeholder ? `Photo ${i + 1} - Coming Soon` : `Kimberly photo ${i + 1}`;
         img.loading = 'lazy';
         
         galleryItem.appendChild(img);
@@ -58,7 +82,7 @@ function generateGallery() {
         // Store image data
         images.push({
             src: imagePath,
-            alt: `Kimberly photo ${i + 1}`
+            alt: photo.placeholder ? `Photo ${i + 1} - Coming Soon` : `Kimberly photo ${i + 1}`
         });
         
         // Add click handler for lightbox
@@ -76,6 +100,28 @@ function setupEventListeners() {
             enterSite();
         }
     });
+    
+    // Navigation buttons
+    const homeBtn = document.getElementById('home-btn');
+    const partyPlanBtn = document.getElementById('party-plan-btn');
+    
+    if (homeBtn) {
+        homeBtn.addEventListener('click', () => {
+            // Reset to landing page
+            hasEnteredSite = false;
+            mainContent.classList.add('hidden');
+            landing.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            window.scrollTo(0, 0);
+        });
+    }
+    
+    if (partyPlanBtn) {
+        partyPlanBtn.addEventListener('click', () => {
+            // Placeholder for party plan functionality
+            console.log('Party Plan clicked - functionality coming soon!');
+        });
+    }
     
     // Back to top button
     backToTop.addEventListener('click', scrollToTop);
