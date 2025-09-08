@@ -11,6 +11,7 @@ const lightboxPrev = document.querySelector('.lightbox-prev');
 const lightboxNext = document.querySelector('.lightbox-next');
 const lightboxOverlay = document.querySelector('.lightbox-overlay');
 const confettiContainer = document.getElementById('confetti');
+const navigation = document.querySelector('.navigation');
 
 // State
 let currentImageIndex = 0;
