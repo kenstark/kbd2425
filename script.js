@@ -117,7 +117,7 @@ function setupEventListeners() {
     
     if (partyPlanBtn) {
         partyPlanBtn.addEventListener('click', () => {
-            window.location.href = 'choose-your-adventure.html';
+            window.location.href = 'choose-your-.html';
         });
     }
     
