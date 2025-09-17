@@ -278,20 +278,32 @@
                     return;
                 }
 
-                if (selected.size >= MAX_ITEMS) {
-                    showFeedback("Don't get greedy now", true);
-                    return;
+                let replacedProductId = null;
+                if (currentlySelectedInGroup && currentlySelectedInGroup !== productId) {
+                    if (lockedSelections.has(currentlySelectedInGroup)) {
+                        showFeedback('That time slot is already locked in.', true);
+                        return;
+                    }
+                    selected.delete(currentlySelectedInGroup);
+                    selectedByGroup.delete(groupId);
+                    checkoutAnnotations.delete(currentlySelectedInGroup);
+                    replacedProductId = currentlySelectedInGroup;
                 }
 
-                if (currentlySelectedInGroup && currentlySelectedInGroup !== productId) {
-                    showFeedback(`You already chose one for ${groupId}`, true);
+                if (selected.size >= MAX_ITEMS) {
+                    showFeedback("Don't get greedy now", true);
+                    if (replacedProductId) {
+                        // Re-add the replaced selection since we couldn't add the new one
+                        selected.add(replacedProductId);
+                        selectedByGroup.set(groupId, replacedProductId);
+                    }
                     return;
                 }
 
                 selected.add(productId);
                 selectedByGroup.set(groupId, productId);
                 updateCartUI();
-                showFeedback('Added to cart', false);
+                showFeedback(replacedProductId ? 'Swapped your pick!' : 'Added to cart', false);
                 clearCartFeedback();
             }
 
