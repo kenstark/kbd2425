@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim's 24K Magic Year • Choose Your Adventure</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <nav class="navigation store-navigation">
+        <div class="nav-container">
+            <button class="nav-btn back-btn" type="button">Back</button>
+            <h1 class="page-title">Choose Your Adventure</h1>
+            <button class="nav-btn cart-toggle" type="button">My Cart (0)</button>
+        </div>
+    </nav>
+
+    <main class="main-content choose-adventure-page">
+        <section class="choose-adventure-store">
+            <div class="container">
+                <header class="store-header">
+                    <h2 class="section-title">Build Kim's Ultimate Celebration</h2>
+                    <p class="choose-adventure-subtitle">Pick up to three experiences to craft the perfect birthday adventure. Tap any card to add or remove it from your cart.</p>
+                </header>
+
+                <div class="store-feedback" role="status" aria-live="polite"></div>
+
+                <div class="product-schedule"></div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="cart-panel" aria-hidden="true">
+        <div class="cart-panel__header">
+            <h3>My Cart</h3>
+            <button class="cart-panel__close" type="button" aria-label="Close cart">&times;</button>
+        </div>
+        <ul class="cart-items"></ul>
+        <div class="cart-empty" hidden>Your cart is empty. Start adding adventures!</div>
+        <div class="cart-feedback" role="status" aria-live="polite"></div>
+        <button class="cart-checkout-btn" type="button">Checkout</button>
+    </aside>
+
+    <div class="cart-overlay" aria-hidden="true"></div>
+
+    <script>
+        (function() {
+            const products = [
+                {
+                    id: 'morning-potter-class',
+                    name: 'Morning Pottery Class',
+                    price: '$60',
+                    description: 'Guided wheel-throwing session, freshly brewed coffees in hand.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0Y3RUZFNiIvPgogIDxlbGxpcHNlIGN4PSIxNDUiIGN5PSIyMDYiIHJ4PSI5NSIgcnk9IjQ0IiBmaWxsPSIjRTRENEM4Ii8+CiAgPGVsbGlwc2UgY3g9IjE0NSIgY3k9IjE5OCIgcng9IjcwIiByeT0iMjgiIGZpbGw9IiNEMEJCQUYiLz4KICA8cGF0aCBkPSJNMTEyIDE0NmMwLTI2IDE4LTUwIDMzLTUwczMzIDI0IDMzIDUwYzAgMzItMTUgNTYtMzMgNTZzLTMzLTI0LTMzLTU2eiIgZmlsbD0iI0IyN0E1OCIvPgogIDxwYXRoIGQ9Ik0xMjggMTEyaDM0YzggMCAxNC02IDE0LTE0cy02LTE0LTE0LTE0aC0zNGMtOCAwLTE0IDYtMTQgMTRzNiAxNCAxNCAxNHoiIGZpbGw9IiM5QzY2NDQiLz4KICA8cGF0aCBkPSJNOTIgMjE2aDEwNmMxMCAwIDE4IDggMTggMThzLTggMTgtMTggMThIOTJjLTEwIDAtMTgtOC0xOC0xOHM4LTE4IDE4LTE4eiIgZmlsbD0iIzhCNUUzQyIvPgogIDxyZWN0IHg9IjE5OCIgeT0iOTIiIHdpZHRoPSI0NCIgaGVpZ2h0PSI0MCIgcng9IjEyIiBmaWxsPSIjRjdFN0MxIi8+CiAgPHBhdGggZD0iTTIwNiAxMzJoMjJjMTEgMCAyMCA5IDIwIDIwcy05IDIwLTIwIDIwaC0yMmMtMTEgMC0yMC05LTIwLTIwczktMjAgMjAtMjB6IiBmaWxsPSIjRERCODkyIi8+CiAgPHBhdGggZD0iTTIwMCAxMDhoMjgiIHN0cm9rZT0iIzdGNUMzQSIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNODAgMTIyYzgtMzIgMzYtNTYgNjUtNTZzNTcgMjQgNjUgNTYiIHN0cm9rZT0iI0Q0Qjg5RiIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtZGFzaGFycmF5PSIxNCAxNCIvPgogIDxjaXJjbGUgY3g9IjIxMCIgY3k9IjEyNCIgcj0iNiIgZmlsbD0iIzdGNUMzQSIvPgogIDxwYXRoIGQ9Ik0xMzggMjEyaDE0IiBzdHJva2U9IiNGNUYzRUYiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg=='
+                },
+                {
+                    id: 'coffee-tasting',
+                    name: 'Artisan Coffee Tasting',
+                    price: '$35',
+                    description: 'Sample small-batch roasts with a barista-led tasting flight.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0Y4RjFFMSIvPgogIDxyZWN0IHg9IjYwIiB5PSIxNzAiIHdpZHRoPSI3MCIgaGVpZ2h0PSI1MCIgcng9IjIwIiBmaWxsPSIjRDJBNjc5Ii8+CiAgPHBhdGggZD0iTTYwIDE5MGg3MGMwIDIwLTE0IDM2LTM1IDM2cy0zNS0xNi0zNS0zNnoiIGZpbGw9IiNCMDdBNEEiLz4KICA8cGF0aCBkPSJNMTUwIDEyMGg1MGMxOCAwIDMyIDE0IDMyIDMycy0xNCAzMi0zMiAzMmgtMTAiIHN0cm9rZT0iIzdDNEUyRiIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iMTQwIiB5PSIxMjAiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcng9IjI0IiBmaWxsPSIjRTBCMzg5Ii8+CiAgPHBhdGggZD0iTTE1MCAxODJjOCA4IDIwIDEyIDMwIDEyczIwLTQgMzAtMTIiIHN0cm9rZT0iIzdDNEUyRiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8ZWxsaXBzZSBjeD0iMjA1IiBjeT0iMTQ0IiByeD0iMTYiIHJ5PSIxMiIgZmlsbD0iI0Y2RTVDRiIvPgogIDxwYXRoIGQ9Ik0xMDQgMTQyYy0xMC0yNCAxMi00MiAyOS01NCAyMC0xNCA0OS0yMCA3MC0xMiIgc3Ryb2tlPSIjQjA3QTRBIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjEwIDEyIi8+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iMTU4IiByPSI4IiBmaWxsPSIjOEM1ODM4Ii8+CiAgPGNpcmNsZSBjeD0iMTMwIiBjeT0iMTY4IiByPSI3IiBmaWxsPSIjOEM1ODM4Ii8+CiAgPGNpcmNsZSBjeD0iOTYiIGN5PSIxNzYiIHI9IjYiIGZpbGw9IiM4QzU4MzgiLz4KPC9zdmc+'
+                },
+                {
+                    id: 'botanical-brunch',
+                    name: 'Botanical Garden Brunch',
+                    price: '$85',
+                    description: 'Private garden tour followed by a chef-curated brunch.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0YxRkFGMCIvPgogIDxjaXJjbGUgY3g9IjE0NSIgY3k9IjE1MCIgcj0iOTAiIGZpbGw9IiNFMEYzREQiLz4KICA8ZWxsaXBzZSBjeD0iMTQ1IiBjeT0iMTcwIiByeD0iNzAiIHJ5PSI0MCIgZmlsbD0iI0ZGRkZGRiIvPgogIDxwYXRoIGQ9Ik0xMDUgMTQ2YzE4LTE4IDQyLTE4IDU4IDAiIHN0cm9rZT0iIzZCQUE3NSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTIwIDE5MGM4IDEwIDE2IDE0IDI1IDE0czE3LTQgMjUtMTQiIHN0cm9rZT0iIzZCQUE3NSIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNOTIgMTUwYy0xMC0yMiAxMi00MiAyOC01MCIgc3Ryb2tlPSIjQTdEMTg4IiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xOTggMTUwYzEwLTIyLTEyLTQyLTI4LTUwIiBzdHJva2U9IiNBN0QxODgiIHN0cm9rZS13aWR0aD0iOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMTQ1IiBjeT0iMTEyIiByPSIyNCIgZmlsbD0iI0Y5RDM1QyIvPgogIDxwYXRoIGQ9Ik04MCAyMTBjMzItMTggOTgtMTggMTMwIDAiIHN0cm9rZT0iIzdEQkY4MiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTEyMCAyMTBjLTggMTYtMjQgMjYtNDAgMzAiIHN0cm9rZT0iIzZCQUE3NSIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTcwIDIxMGM4IDE2IDI0IDI2IDQwIDMwIiBzdHJva2U9IiM2QkFBNzUiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg=='
+                },
+                {
+                    id: 'mixology-class',
+                    name: 'Craft Cocktail Lab',
+                    price: '$70',
+                    description: 'Shake up signature drinks with a pro mixologist.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0Y1RjBGRiIvPgogIDxwYXRoIGQ9Ik0xMjAgNzBoNTBsLTEyIDEwMGgtMjZMMTIwIDcweiIgZmlsbD0iI0M5QjZGNSIvPgogIDxwYXRoIGQ9Ik0xNDAgMTcwdjQwYzAgMTQgMTAgMjQgMjQgMjRoNmMxNCAwIDI0LTEwIDI0LTI0di0xNiIgc3Ryb2tlPSIjNkQ1QkQwIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTg0IDEzMGMyMiAwIDQwIDE4IDQwIDQwcy0xOCA0MC00MCA0MGMtMTAgMC0xOC00LTI2LTEwIiBmaWxsPSIjOUVBM0Y1IiBvcGFjaXR5PSIwLjYiLz4KICA8cGF0aCBkPSJNOTAgMTIwaDcybC0yMiA4NmgtMjhMOTAgMTIweiIgZmlsbD0iI0YyQjVENCIvPgogIDxwYXRoIGQ9Ik05MCAxMjBoNzIiIHN0cm9rZT0iIzZENUJEMCIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI5NiIgY3k9IjkwIiByPSIxMCIgc3Ryb2tlPSIjNkQ1QkQwIiBzdHJva2Utd2lkdGg9IjYiLz4KICA8cGF0aCBkPSJNMTEyIDIxMGg2MCIgc3Ryb2tlPSIjNkQ1QkQwIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSIyMDQiIGN5PSIxMDgiIHI9IjE0IiBmaWxsPSIjRkZDRDgzIi8+CiAgPHBhdGggZD0iTTE5OCAxMDhsMTItMjIiIHN0cm9rZT0iIzZENUJEMCIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+'
+                },
+                {
+                    id: 'karaoke-night',
+                    name: 'Karaoke Night',
+                    price: '$45',
+                    description: 'Sing your heart out with VIP room access and custom playlists.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0ZERTlGRiIvPgogIDxlbGxpcHNlIGN4PSIxNDUiIGN5PSIyMTAiIHJ4PSIxMDAiIHJ5PSIzNiIgZmlsbD0iI0U3QzVGNCIvPgogIDxwYXRoIGQ9Ik0xMzYgOTBjMTQgMCAyNiAxMiAyNiAyNnY1OGMwIDE0LTEyIDI2LTI2IDI2cy0yNi0xMi0yNi0yNnYtNThjMC0xNCAxMi0yNiAyNi0yNnoiIGZpbGw9IiM1NzM1N0QiLz4KICA8cGF0aCBkPSJNMTM2IDg2YzE4IDAgMzIgMTQgMzIgMzJ2MTJoLTY0di0xMmMwLTE4IDE0LTMyIDMyLTMyeiIgZmlsbD0iIzdDNEVBMyIvPgogIDxjaXJjbGUgY3g9IjE4MCIgY3k9IjEyNiIgcj0iMTYiIGZpbGw9IiNGRkI0RTYiLz4KICA8Y2lyY2xlIGN4PSIyMDQiIGN5PSIxNTIiIHI9IjEyIiBmaWxsPSIjRkY5QUQ5Ii8+CiAgPHBhdGggZD0iTTkyIDEwNGwtMTgtMTAiIHN0cm9rZT0iIzdDNEVBMyIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNOTIgMTMwbC0yMi02IiBzdHJva2U9IiM3QzRFQTMiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE1MCAyMDBsMTQgNDIiIHN0cm9rZT0iIzU3MzU3RCIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTExNCAyMDBsLTE0IDQyIiBzdHJva2U9IiM1NzM1N0QiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yMTAgMTkwYzEwIDAgMTggOCAxOCAxOHMtOCAxOC0xOCAxOC0xOC04LTE4LTE4IDgtMTggMTgtMTh6IiBzdHJva2U9IiM3QzRFQTMiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxwYXRoIGQ9Ik0yMTAgMTkwdi0xOCIgc3Ryb2tlPSIjN0M0RUEzIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4='
+                },
+                {
+                    id: 'puppy-yoga',
+                    name: 'Puppy Yoga Session',
+                    price: '$55',
+                    description: 'Stretch alongside playful pups during a guided flow.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0ZERjVFQyIvPgogIDxyZWN0IHg9IjcwIiB5PSIyMTAiIHdpZHRoPSIxNTAiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0iI0I3RTRDNyIvPgogIDxwYXRoIGQ9Ik05OCAxOThjMTgtMjggNDQtNDQgNzAtNDRzNTIgMTYgNzAgNDQiIHN0cm9rZT0iIzk1RDBBRSIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTEzMiAxNDJjMC0yMCAxNi0zNiAzNi0zNnMzNiAxNiAzNiAzNi0xNiAzNi0zNiAzNi0zNi0xNi0zNi0zNnoiIGZpbGw9IiNGRkUxRDYiLz4KICA8cGF0aCBkPSJNMTQ2IDE0NGMwLTEyIDgtMjAgMjItMjBzMjIgOCAyMiAyMC04IDIwLTIyIDIwLTIyLTgtMjItMjB6IiBmaWxsPSIjRjlDMEE4Ii8+CiAgPHBhdGggZD0iTTEyNiAxNzJjLTE0IDAtMzQgMTAtMzggMjQiIHN0cm9rZT0iIzk1RDBBRSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjA0IDE3MmMxNCAwIDM0IDEwIDM4IDI0IiBzdHJva2U9IiM5NUQwQUUiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMTUwIiBjeT0iMTUwIiByPSI2IiBmaWxsPSIjM0YzRjNGIi8+CiAgPGNpcmNsZSBjeD0iMTcyIiBjeT0iMTUwIiByPSI2IiBmaWxsPSIjM0YzRjNGIi8+CiAgPHBhdGggZD0iTTE1NiAxNjBsNiA2IDYtNiIgc3Ryb2tlPSIjM0YzRjNGIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNDQgMTE2bC0xOC0yNiIgc3Ryb2tlPSIjRjRCMDlGIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNzggMTE2bDE4LTI2IiBzdHJva2U9IiNGNEIwOUYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE0MCAyMTRoMTgiIHN0cm9rZT0iIzk1RDBBRSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+'
+                },
+                {
+                    id: 'escape-room',
+                    name: 'Escape Room Challenge',
+                    price: '$90',
+                    description: 'Solve clues and puzzles in a thrilling themed escape.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0YxRjVGRiIvPgogIDxyZWN0IHg9IjgwIiB5PSI3MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSIxODAiIHJ4PSIyMCIgZmlsbD0iI0FGQzNGRiIvPgogIDxyZWN0IHg9IjExMCIgeT0iMTAwIiB3aWR0aD0iNzAiIGhlaWdodD0iMTIwIiByeD0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIxNjAiIHI9IjEwIiBmaWxsPSIjNkI3RkQ2Ii8+CiAgPHBhdGggZD0iTTEzOCA1OGg1NCIgc3Ryb2tlPSIjNkI3RkQ2IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTg4IDIxNGg0MCIgc3Ryb2tlPSIjNkI3RkQ2IiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSIyMjgiIGN5PSIyMTQiIHI9IjIyIiBmaWxsPSIjRkZGRkZGIiBzdHJva2U9IiM2QjdGRDYiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxwYXRoIGQ9Ik0yMjggMjA2bDEwIDEwLTE4IDE4IiBzdHJva2U9IiM2QjdGRDYiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTkwIDI0NGgxMTAiIHN0cm9rZT0iIzZCN0ZENiIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTk2IDEzMGwtMTgtMTgiIHN0cm9rZT0iIzZCN0ZENiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI5MiIgY3k9IjEzNiIgcj0iOCIgZmlsbD0iIzZCN0ZENiIvPgo8L3N2Zz4='
+                },
+                {
+                    id: 'detective-dinner',
+                    name: 'Detective Dinner',
+                    price: '$120',
+                    description: 'Tackle a hilarious and challenging crime while you feast on a fantastic dinner.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI0VDRThGRiIvPgogIDxjaXJjbGUgY3g9IjEyNSIgY3k9IjE1MCIgcj0iNzAiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNODUgMTUwYzAtMjYgMTgtNDYgNDAtNDZzNDAgMjAgNDAgNDYtMTggNDYtNDAgNDYtNDAtMjAtNDAtNDZ6IiBmaWxsPSIjN0M3QkEzIi8+CiAgPHBhdGggZD0iTTk3IDE5MGg1NmM4IDAgMTQgNiAxNCAxNHMtNiAxNC0xNCAxNEg5N2MtOCAwLTE0LTYtMTQtMTRzNi0xNCAxNC0xNHoiIGZpbGw9IiM1QzU4N0YiLz4KICA8cGF0aCBkPSJNMTI4IDEzNGM4LTEyIDE4LTE4IDMwLTE4IiBzdHJva2U9IiNGNEQ3QjIiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIyMCAyMTRsMzIgMzIiIHN0cm9rZT0iIzVDNTg3RiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMjMyIiBjeT0iMjI2IiByPSIyMCIgZmlsbD0iI0ZGRkZGRiIgc3Ryb2tlPSIjNUM1ODdGIiBzdHJva2Utd2lkdGg9IjgiLz4KICA8cGF0aCBkPSJNMjI2IDIyMmwxMiAxMiIgc3Ryb2tlPSIjNUM1ODdGIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xMjAgMTA2bC0xNi0yNCIgc3Ryb2tlPSIjNUM1ODdGIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNjggMTA2bDE2LTI0IiBzdHJva2U9IiM1QzU4N0YiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iMTE0IiB5PSIyMDAiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxNiIgcng9IjgiIGZpbGw9IiNGN0IyNjciLz4KICA8cGF0aCBkPSJNOTIgMjEwYzI4LTE2IDg4LTE2IDExNiAwIiBzdHJva2U9IiM1QzU4N0YiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4='
+                },
+                {
+                    id: 'chef-dinner',
+                    name: 'Private Chef Dinner',
+                    price: '$200',
+                    description: 'Multi-course tasting menu crafted in your own kitchen.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iI2ZmZThjOCIvPjxwYXRoIGQ9Ik0xMDUgMjAwaDc5YzEwIDIwIDIwIDIwIDMwIDBMMjI1IDE0MGMxMC0yMCAwLTQwLTIwLTQwaC03OUwxMDUgOTBoLTc5Yy0yMCAwLTMwIDIwLTIwIDQwbDUxIDc5YzEwIDIwIDIwIDIwIDMwIDB6IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTQ1IiBjeT0iMTIwIiByPSI0MCIgZmlsbD0iI2Y2OWI4YyIvPjwvc3ZnPg=='
+                },
+                {
+                    id: 'weekend-galaxy',
+                    name: 'Galaxy Rooftop Party',
+                    price: '$260',
+                    description: 'Night under the stars with DJ set and custom lighting.',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkwIiBoZWlnaHQ9IjI5MCIgdmlld0JveD0iMCAwIDI5MCAyOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjI5MCIgaGVpZ2h0PSIyOTAiIHJ4PSIyMCIgZmlsbD0iIzBGMTEyMyIvPgogIDxwYXRoIGQ9Ik01MCAyMTBoMTkwdjYwSDUwdi02MHoiIGZpbGw9IiMxRjJBNUYiLz4KICA8cGF0aCBkPSJNNzQgMjEwaDI0djM0SDc0di0zNHpNMTEyIDIxMGgzMHY0MGgtMzB2LTQwek0xNTggMjEwaDI2djI4aC0yNnYtMjh6TTIwMCAyMTBoMjR2NDhoLTI0di00OHoiIGZpbGw9IiMyRTNBNzAiLz4KICA8Y2lyY2xlIGN4PSIyMTQiIGN5PSI5NiIgcj0iMjgiIGZpbGw9IiNGNEM5N0YiLz4KICA8cGF0aCBkPSJNODIgMTMyYzAtMTAgOC0xOCAxOC0xOHMxOCA4IDE4IDE4LTggMTgtMTggMTgtMTgtOC0xOC0xOHoiIGZpbGw9IiM2QTdBQ0YiLz4KICA8cGF0aCBkPSJNMTUwIDExNmMwLTggNi0xNCAxNC0xNHMxNCA2IDE0IDE0LTYgMTQtMTQgMTQtMTQtNi0xNC0xNHoiIGZpbGw9IiM4QUEwRkYiLz4KICA8Y2lyY2xlIGN4PSIxMTIiIGN5PSI4NCIgcj0iNiIgZmlsbD0iI0Y3RTdBOCIvPgogIDxjaXJjbGUgY3g9IjE2OCIgY3k9IjcwIiByPSI1IiBmaWxsPSIjRjdFN0E4Ii8+CiAgPGNpcmNsZSBjeD0iMTQwIiBjeT0iOTYiIHI9IjQiIGZpbGw9IiNGN0U3QTgiLz4KICA8cGF0aCBkPSJNNjAgMjMwaDE3MCIgc3Ryb2tlPSIjNDQ1MkEzIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZGFzaGFycmF5PSIyIDEwIi8+Cjwvc3ZnPg=='
+                }
+            ];
+
+            const scheduleGroups = [
+                {
+                    timeLabel: '10:00 - 11:30 AM',
+                    productIds: ['morning-potter-class', 'coffee-tasting', 'botanical-brunch']
+                },
+                {
+                    timeLabel: '3:00 - 4:00 PM',
+                    productIds: ['mixology-class', 'karaoke-night', 'puppy-yoga']
+                },
+                {
+                    timeLabel: '6:00 - 8:00 PM',
+                    productIds: ['escape-room', 'detective-dinner', 'chef-dinner', 'weekend-galaxy']
+                }
+            ];
+
+            const scheduleContainer = document.querySelector('.product-schedule');
+            const feedback = document.querySelector('.store-feedback');
+            const cartToggle = document.querySelector('.cart-toggle');
+            const cartPanel = document.querySelector('.cart-panel');
+            const cartOverlay = document.querySelector('.cart-overlay');
+            const cartClose = document.querySelector('.cart-panel__close');
+            const cartList = document.querySelector('.cart-items');
+            const cartEmpty = document.querySelector('.cart-empty');
+            const cartFeedback = document.querySelector('.cart-feedback');
+            const cartCheckoutBtn = document.querySelector('.cart-checkout-btn');
+            const backBtn = document.querySelector('.back-btn');
+
+            const MAX_ITEMS = 3;
+            const selected = new Set();
+            const selectedByGroup = new Map();
+            const requiredSelectionIds = ['morning-potter-class', 'puppy-yoga', 'detective-dinner'];
+            const requiredSelectionSet = new Set(requiredSelectionIds);
+            const lockedSelections = new Set();
+            const checkoutAnnotations = new Map();
+
+            function updateCartUI() {
+                cartList.innerHTML = '';
+
+                if (selected.size === 0) {
+                    cartEmpty.hidden = false;
+                    cartToggle.textContent = 'My Cart (0)';
+                    if (cartCheckoutBtn) {
+                        cartCheckoutBtn.disabled = true;
+                    }
+                    clearCartFeedback();
+                } else {
+                    cartEmpty.hidden = true;
+                    selected.forEach((productId) => {
+                        const item = products.find((product) => product.id === productId);
+                        if (!item) return;
+                        const li = document.createElement('li');
+                        li.className = 'cart-item';
+                        li.innerHTML = `
+                            <div class="cart-item__info">
+                                <span class="cart-item__name">${item.name}</span>
+                                <span class="cart-item__price">${item.price}</span>
+                            </div>
+                            <span class="cart-item__status" aria-hidden="true"></span>
+                            <button class="cart-item__remove" type="button" aria-label="Remove ${item.name} from cart">×</button>
+                        `;
+                        li.querySelector('.cart-item__remove').addEventListener('click', () => toggleProduct(item.id));
+                        const status = checkoutAnnotations.get(productId);
+                        const statusLabel = li.querySelector('.cart-item__status');
+                        if (status === 'correct') {
+                            li.classList.add('cart-item--correct');
+                            statusLabel.textContent = 'Correct';
+                        } else if (status === 'incorrect') {
+                            li.classList.add('cart-item--incorrect');
+                            statusLabel.textContent = 'Swap This';
+                        } else {
+                            statusLabel.textContent = '';
+                        }
+                        cartList.appendChild(li);
+                    });
+                    cartToggle.textContent = `My Cart (${selected.size})`;
+                    if (cartCheckoutBtn) {
+                        cartCheckoutBtn.disabled = false;
+                    }
+                }
+
+                document.querySelectorAll('.product-card').forEach((card) => {
+                    const id = card.dataset.productId;
+                    const isSelected = selected.has(id);
+                    const isLocked = lockedSelections.has(id);
+                    card.classList.toggle('selected', isSelected);
+                    card.classList.toggle('product-card--locked', isLocked);
+                    const button = card.querySelector('.product-card__action');
+                    if (!button) return;
+                    if (isLocked) {
+                        button.textContent = 'Locked';
+                        button.disabled = true;
+                        button.classList.remove('product-card__action--remove');
+                        button.classList.add('product-card__action--locked');
+                    } else if (isSelected) {
+                        button.textContent = 'Remove';
+                        button.disabled = false;
+                        button.classList.add('product-card__action--remove');
+                        button.classList.remove('product-card__action--locked');
+                    } else {
+                        button.textContent = 'Add to Cart';
+                        button.disabled = false;
+                        button.classList.remove('product-card__action--remove', 'product-card__action--locked');
+                    }
+                });
+
+                const staleAnnotationIds = [];
+                checkoutAnnotations.forEach((_, id) => {
+                    if (!selected.has(id)) {
+                        staleAnnotationIds.push(id);
+                    }
+                });
+                staleAnnotationIds.forEach((id) => {
+                    checkoutAnnotations.delete(id);
+                    lockedSelections.delete(id);
+                });
+            }
+
+            function showFeedback(message, isWarning) {
+                feedback.textContent = message;
+                feedback.classList.toggle('warning', Boolean(isWarning));
+                feedback.classList.add('visible');
+                clearTimeout(showFeedback.timeoutId);
+                showFeedback.timeoutId = setTimeout(() => {
+                    feedback.classList.remove('visible');
+                }, 2500);
+            }
+
+            function getGroupId(productId) {
+                for (const group of scheduleGroups) {
+                    if (group.productIds.includes(productId)) {
+                        return group.timeLabel;
+                    }
+                }
+                return null;
+            }
+
+            function clearCartFeedback() {
+                if (!cartFeedback) return;
+                cartFeedback.textContent = '';
+                cartFeedback.classList.remove('cart-feedback--error', 'cart-feedback--success');
+            }
+
+            function toggleProduct(productId) {
+                const groupId = getGroupId(productId);
+                const currentlySelectedInGroup = selectedByGroup.get(groupId);
+
+                if (lockedSelections.has(productId)) {
+                    showFeedback('This pick is already locked in.', false);
+                    return;
+                }
+
+                if (selected.has(productId)) {
+                    selected.delete(productId);
+                    selectedByGroup.delete(groupId);
+                    updateCartUI();
+                    showFeedback('Removed from cart', false);
+                    clearCartFeedback();
+                    return;
+                }
+
+                if (selected.size >= MAX_ITEMS) {
+                    showFeedback("Don't get greedy now", true);
+                    return;
+                }
+
+                if (currentlySelectedInGroup && currentlySelectedInGroup !== productId) {
+                    showFeedback(`You already chose one for ${groupId}`, true);
+                    return;
+                }
+
+                selected.add(productId);
+                selectedByGroup.set(groupId, productId);
+                updateCartUI();
+                showFeedback('Added to cart', false);
+                clearCartFeedback();
+            }
+
+            function handleCheckout() {
+                if (!cartCheckoutBtn) return;
+
+                if (selected.size === 0) {
+                    cartFeedback.textContent = 'Add adventures before checking out!';
+                    cartFeedback.classList.add('cart-feedback--error');
+                    cartFeedback.classList.remove('cart-feedback--success');
+                    return;
+                }
+
+                const selectedIds = Array.from(selected);
+                const correct = selectedIds.filter((id) => requiredSelectionSet.has(id));
+                const incorrect = selectedIds.filter((id) => !requiredSelectionSet.has(id));
+                const missing = requiredSelectionIds.filter((id) => !selected.has(id));
+                const success = incorrect.length === 0 && missing.length === 0 && selectedIds.length === requiredSelectionSet.size;
+
+                checkoutAnnotations.clear();
+                lockedSelections.clear();
+
+                if (success) {
+                    requiredSelectionIds.forEach((id) => {
+                        checkoutAnnotations.set(id, 'correct');
+                        lockedSelections.add(id);
+                    });
+                    cartFeedback.textContent = 'Adventure locked in!';
+                    cartFeedback.classList.remove('cart-feedback--error');
+                    cartFeedback.classList.add('cart-feedback--success');
+                    showFeedback('Checkout complete!', false);
+                } else {
+                    correct.forEach((id) => {
+                        checkoutAnnotations.set(id, 'correct');
+                        lockedSelections.add(id);
+                    });
+                    incorrect.forEach((id) => {
+                        checkoutAnnotations.set(id, 'incorrect');
+                    });
+                    cartFeedback.textContent = "That would've been nice, but not quite. Try again.";
+                    cartFeedback.classList.remove('cart-feedback--success');
+                    cartFeedback.classList.add('cart-feedback--error');
+                    showFeedback("That would've been nice, but not quite. Try again.", true);
+                }
+
+                updateCartUI();
+            }
+
+            scheduleGroups.forEach((group) => {
+                const section = document.createElement('section');
+                section.className = 'product-section';
+                section.innerHTML = `
+                    <header class="product-section__header">
+                        <h3>${group.timeLabel}</h3>
+                        <p class="product-section__hint">Pick one experience for this time slot</p>
+                    </header>
+                    <div class="product-grid" role="list"></div>
+                `;
+
+                const grid = section.querySelector('.product-grid');
+
+                group.productIds.forEach((productId) => {
+                    const product = products.find((item) => item.id === productId);
+                    if (!product) return;
+
+                    const card = document.createElement('article');
+                    card.className = 'product-card';
+                    card.dataset.productId = product.id;
+                    card.setAttribute('role', 'listitem');
+                    card.innerHTML = `
+                        <div class="product-card__image-wrapper">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        </div>
+                        <div class="product-card__body">
+                            <div>
+                                <h3 class="product-card__title">${product.name}</h3>
+                                <p class="product-card__description">${product.description}</p>
+                            </div>
+                            <footer class="product-card__footer">
+                                <button class="product-card__action" type="button">Add to Cart</button>
+                            </footer>
+                        </div>
+                    `;
+
+                    card.addEventListener('click', (event) => {
+                        if (event.target.closest('button')) {
+                            toggleProduct(product.id);
+                            return;
+                        }
+
+                        toggleProduct(product.id);
+                    });
+
+                    grid.appendChild(card);
+                });
+
+                scheduleContainer.appendChild(section);
+            });
+
+            updateCartUI();
+
+            function openCart() {
+                cartPanel.classList.add('open');
+                cartOverlay.classList.add('visible');
+                cartPanel.setAttribute('aria-hidden', 'false');
+                cartOverlay.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeCart() {
+                cartPanel.classList.remove('open');
+                cartOverlay.classList.remove('visible');
+                cartPanel.setAttribute('aria-hidden', 'true');
+                cartOverlay.setAttribute('aria-hidden', 'true');
+            }
+
+            cartToggle.addEventListener('click', () => {
+                if (cartPanel.classList.contains('open')) {
+                    closeCart();
+                } else {
+                    openCart();
+                }
+            });
+
+            cartClose.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+
+            if (cartCheckoutBtn) {
+                cartCheckoutBtn.addEventListener('click', handleCheckout);
+            }
+
+            backBtn.addEventListener('click', () => {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
